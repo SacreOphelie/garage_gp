@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pilotes{% endblock %}
+
+{% block body %}
+    <div class="slide" id="all" >
+        <div id="all_pilote">
+            {% for pilote in pilotes %}
+            {% set url = path('pilote_show', {'slug':pilote.slug}) %}
+                <a href="{{url}}" class="pilote">
+                    <h2>{{ pilote.nom }}</h2>
+                    <img src="{{ pilote.image }}">
+                    <p>{{ pilote.ecurie }}</p>
+                </a>
+            {% else %}
+                <p>Aucun pilote trouvé.</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

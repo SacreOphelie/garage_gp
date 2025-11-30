@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ pilote.nom }}{% endblock %}
+
+{% block body %}
+
+<div class="pilot-page">
+
+    <!-- SIDEBAR -->
+    <aside class="pilot-sidebar">
+        <h3>Pilotes de {{ pilote.ecurie }}</h3>
+        <ul>
+            {% for p in sameTeam %}
+                {% if p.id != pilote.id %}
+                    <li>
+                        <a href="{{ path('pilote_show', {slug: p.slug}) }}">
+                            {{ p.nom }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <div class="pilot-content">
+        <div class="pilot-header">
+            <img src="{{ pilote.image }}" alt="{{ pilote.nom }}">
+            <div class="pilot-info">
+                <h1>{{ pilote.nom }}</h1>
+                <p class="ecurie">{{ pilote.ecurie }}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

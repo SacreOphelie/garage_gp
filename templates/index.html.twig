@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage Gp{% endblock %}
+
+{% block body %}
+<div class="slide">
+    <video src="https://gp-explorer.fr/wp-content/uploads/2025/09/GPE25-teaser-cut-ultralight.mp4" autoplay muted loop></video>
+</div>
+<div class="slide" id="pres">
+    <div class="content-about">
+        <h3>Bienvenue sur le site du gp explorer The Last Race</h3>
+        <p>Ici on vous présente les différentes voitures présentent au gp explorer ainsi que leurs pilotes.</p>
+        <p>Après deux éditions inoubliables, le GP Explorer revient pour une ultime édition, qui s’annonce encore plus spectaculaire.</p>
+        <p>Imaginé par Squeezie, cet événement unique mêle les codes du monde du divertissement en ligne et celui du sport automobile, offrant un spectacle inédit. Cette année, l’événement se tiendra sur trois jours et repoussera une dernière fois les limites, avec une grille internationale. 24 créateurs de contenus et artistes, parmi les plus influents prendront le volant sur le mythique circuit Bugatti du Mans. Entre rivalités, partage et moments mémorables, cette édition s’annonce comme un événement historique à ne pas manquer.</p>
+    </div>
+</div>
+<div class="slide" id="voiture_recent">
+    <h1>Nos 3 dernières voitures</h1>
+    <div class="voitures">
+        {% for voiture in voitures %}
+        {% set url = path('voiture_show', {'slug':voiture.slug}) %}
+            <a href="{{url}}" class="voiture">
+                <h2>{{ voiture.titre }}</h2>
+                <img src="{{ voiture.imageUrl }}">
+                <div class="infos">             
+                    <div class="row">
+                        <p>{{ voiture.marque }}</p>
+                        <p>{{ voiture.prix|number_format(0, ',', '.') }} €</p>
+                    </div>
+                    <div class="row">              
+                        <p>{{voiture.km}} km</p>
+                        <p>{{voiture.modele}}</p>
+                    </div>
+                </div>
+            </a>
+        {% else %}
+            <p>Aucune voiture trouvée.</p>
+        {% endfor %}
+    </div>
+</div>
+<div class="slide" id="pilote_recent" >
+    <h1>Nos 3 derniers pilotes</h1>
+    <div class="pilotes">
+        {% for pilote in pilotes %}
+        {% set url_pilote = path('pilote_show', {'slug':pilote.slug}) %}
+            <a href="{{url_pilote}}" class="pilote">
+                <h2>{{ pilote.nom }}</h2>
+                <img src="{{ pilote.image }}">
+                <p>{{ pilote.ecurie }}</p>
+            </a>
+        {% else %}
+            <p>Aucun pilote trouvé.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

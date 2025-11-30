@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ voiture.titre }}{% endblock %}
+
+{% block body %}
+
+<div class="show-header" style="background-image: url('{{ voiture.imageUrl }}')">
+    <div class="overlay"></div>
+    <div class="content">
+        <h1>{{ voiture.titre }}</h1>
+        <p class="marque">{{ voiture.marque }} – {{ voiture.modele }}</p>
+        <p class="prix">{{ voiture.prix|number_format(0, ',', '.') }} €</p>
+    </div>
+</div>
+
+<div class="container-show">
+    <div class="content-show">
+        <div class="left">
+            <h2>Description</h2>
+            <p class="description">{{ voiture.description|raw }}</p>
+        </div>
+
+        <div class="right">
+            <h2>Informations supplémentaires</h2>
+            <p class="options">{{ voiture.optionTxt|raw }}</p>
+        </div>
+        <div class="caracts left">
+            <h2>Caractéristiques</h2>
+            <ul>
+                <li><strong>Kilométrage  </strong> {{ voiture.km }} km</li>
+                <li><strong>Cylindres </strong> {{ voiture.cylindre }}</li>
+                <li><strong>Puissance  </strong> {{ voiture.puissance }} ch</li>
+                <li><strong>Carburant  </strong> {{ voiture.carburant }}</li>
+                <li><strong>Transmission  </strong> {{ voiture.transmission }}</li>
+                <li><strong>Date de circulation  </strong> {{ voiture.dateCircu|date('d/m/Y') }}</li>
+                <li><strong>Nombre propriétaires  </strong> {{ voiture.nbProprio }}</li>
+            </ul>
+        </div>
+    </div>
+
+    {% if voiture.images is not empty %}
+    <div class="gallery">
+        <h2>Galerie</h2>
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                {% for img in voiture.images %}
+                    <div class="swiper-slide">
+                        <img src="{{ img.url }}" alt="image voiture">
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            <div class="swiper-pagination"></div>
+        </div>
+
+    </div>
+    {% else %}
+    <p>Aucune image disponible.</p>
+    {% endif %}
+
+</div>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+
+</script>
+{% endblock %}

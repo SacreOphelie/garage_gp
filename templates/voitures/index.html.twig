@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voitures{% endblock %}
+
+{% block body %}
+
+    <div class="slide" id="all">
+        <div  id="all_voiture">
+            {% for voiture in voitures %}
+            {% set url = path('voiture_show', {'slug':voiture.slug}) %}
+                <a href="{{url}}" class="voiture">
+                    <h2>{{ voiture.titre }}</h2>
+                    <img src="{{ voiture.imageUrl }}">
+                    <div class="infos">             
+                    <div class="row">
+                        <p>{{ voiture.marque }}</p>
+                        <p>{{ voiture.prix|number_format(0, ',', '.') }} €</p>
+                    </div>
+                    <div class="row">              
+                        <p>{{voiture.km}} km</p>
+                        <p>{{voiture.modele}}</p>
+                    </div>
+                </div>
+                </a>
+            {% else %}
+                <p>Aucune voiture trouvée.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

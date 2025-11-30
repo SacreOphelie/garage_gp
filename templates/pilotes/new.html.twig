@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="form-container">
+    <div class="form-card">
+        <h2>Ajouter une Pilote</h2>
+
+        {{ form_start(form) }}
+
+            <div class="form-group"></div>
+
+            {{ form_widget(form) }}
+
+            <button class="btn-submit">Ajouter</button>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
